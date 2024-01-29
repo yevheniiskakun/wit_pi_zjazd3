@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
-from .models import Product
+from .models import Product, ProductSerializer
 
+from rest_framework import permissions, viewsets
 
 def index(request):
     products = Product.objects.all()
@@ -36,3 +37,12 @@ def mark_product(request, id):
     products = Product.objects.all()
     context = {"products": products}
     return redirect('/')
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows products to be viewed or edited.
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    #permission_classes = [permissions.IsAuthenticated]
