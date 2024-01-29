@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Product, ProductSerializer
 
 from rest_framework import permissions, viewsets, generics
+from rest_framework.response import Response
 
 def index(request):
     products = Product.objects.all()
@@ -10,31 +11,14 @@ def index(request):
     return render(request, 'pages/index.html', context)
 
 def add_product(request):
-    if request.method == 'POST':
-        new_product_name = request.POST.get('new_product')
-
-        if "  " not in new_product_name:
-            Product.objects.create(name=new_product_name)
-
-    products = Product.objects.all()
-    context = {"products": products}
-    return redirect('/')
+    pass
 
 def delete_product(request, id):
     pass
 
 
 def mark_product(request, id):
-    modified_product = Product.objects.get(id=id)
-    if modified_product.buyed == False:
-        modified_product.buyed = True  # change field
-    else:
-        modified_product.buyed = False  # change field
-    modified_product.save()  # this will update only
-    products = Product.objects.all()
-    context = {"products": products}
-    return redirect('/')
-
+    pass
 
 class ProductViewSet(viewsets.ModelViewSet):
     """
@@ -50,3 +34,40 @@ class ProductDelete(generics.DestroyAPIView):
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class MarkProduct(generics.UpdateAPIView):
+    """
+        API endpoint that allows products to be updated.
+    """
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method PUT not allowed"})
+
+        try:
+            instance = Product.objects.get(pk=pk)
+        except:
+            return Response({"error": "Object does not exists"})
+
+        serializer = ProductSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({"post": serializer.data})
+
+class ProductAdd(generics.ListCreateAPIView):
+    """
+        API endpoint that allows products to be created.
+    """
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({'post': serializer.data})
+
+class ProductAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Products.objects.all()
+    serializer_class = WomenSerializer

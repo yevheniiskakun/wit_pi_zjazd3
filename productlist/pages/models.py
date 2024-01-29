@@ -9,7 +9,22 @@ class Product(models.Model):
         return self.name
 
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.Serializer):
+
     class Meta:
         model = Product
         fields = ['id', 'name', 'buyed']
+
+    name = serializers.CharField(max_length=255, read_only=False)
+    buyed = serializers.BooleanField(read_only=False)
+
+    def create(self, validated_data):
+        return Product.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        buyed = validated_data.get("buyed")
+
+        instance.buyed = validated_data.get("buyed", instance.buyed)
+        instance.save()
+
+        return instance

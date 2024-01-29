@@ -38,6 +38,7 @@
             <div class="card-body">
               <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-8">
+                  <h5 class="" style="visibility: hidden;">{{ product.id }}</h5>
                   <h5 class="card-title">{{ product.name }}</h5>
                 </div>
                 <div class="col-4">
@@ -52,7 +53,7 @@
                       </a>
                     </div>
                     <div class="col-12">
-                      <a href="{% url 'pages:delete_product'  product.id %}">
+                      <a href="">
                         <button type="submit" class="btn btn-danger mt-2" style="min-width: 100px;">Usuń</button>
                       </a>
                     </div>
