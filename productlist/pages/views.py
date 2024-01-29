@@ -10,16 +10,6 @@ def index(request):
     context = {"products": products}
     return render(request, 'pages/index.html', context)
 
-def add_product(request):
-    pass
-
-def delete_product(request, id):
-    pass
-
-
-def mark_product(request, id):
-    pass
-
 class ProductViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows products to be viewed or edited.
