@@ -8,12 +8,10 @@
    {% block meta_tags %}
 		<title>Product list PI Zjazd 2</title>
 	{% endblock %}
+
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1573/1573145.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-      <script>
-
-      </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <style>
           body{
             background-image: url('https://i.pinimg.com/474x/e0/c3/73/e0c37353aed33c638aedcd57d21e3ce2.jpg');
@@ -35,5 +33,96 @@
 	{% endblock %}
     </body>
 
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+function delete_product(pk) {
+//console.log(pk);
+
+    var full_url = "http://localhost:8000/api/product_details/" + pk;
+    var product_container_id = "#product_container" + pk
+
+    $.ajax({
+      "url": full_url,
+      "method": "DELETE",
+      dataType: "json",
+      success: $(product_container_id).hide(),
+      error: (error) => {
+        console.log(error);
+      }
+    });
+
+}
+
+function mark_product(pk, product_name, product_status) {
+    console.log(pk);
+    console.log(product_name);
+    console.log(product_status);
+
+    var full_url = "http://localhost:8000/api/product_details/" + pk;
+    var product_bought_checkbox = "product_bought_checkbox" + pk;
+    var product_not_bought_checkbox = "product_not_bought_checkbox" + pk;
+
+    $.ajax({
+      "url": full_url,
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": JSON.stringify({
+        "name": product_name,
+        "buyed": product_status
+      }),
+      "success": function(){
+      if(product_status){
+          document.getElementById(product_bought_checkbox).style.display = "block";
+          document.getElementById(product_not_bought_checkbox).style.display = "none";
+      }
+      else{
+          document.getElementById(product_bought_checkbox).style.display = "none";
+          document.getElementById(product_not_bought_checkbox).style.display = "block";
+      }
+      },
+      "error": (error) => {
+        console.log(error);
+      }
+    });
+    console.log(product_bought_checkbox);
+    console.log(product_not_bought_checkbox);
+}
+
+function add_product() {
+
+    var full_url = "http://localhost:8000/api/add_product";
+
+    var product_name =
+
+    $.ajax({
+      "url": full_url,
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": JSON.stringify({
+        "name": product_name,
+        "buyed": false
+      }),
+      "success": function(){
+      if(product_status){
+          document.getElementById(product_bought_checkbox).style.display = "block";
+          document.getElementById(product_not_bought_checkbox).style.display = "none";
+      }
+      else{
+          document.getElementById(product_bought_checkbox).style.display = "none";
+          document.getElementById(product_not_bought_checkbox).style.display = "block";
+      }
+      },
+      "error": (error) => {
+        console.log(error);
+      }
+    });
+    console.log(product_bought_checkbox);
+    console.log(product_not_bought_checkbox);
+}
+</script>
