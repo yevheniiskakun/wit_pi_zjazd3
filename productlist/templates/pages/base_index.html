@@ -88,41 +88,70 @@ function mark_product(pk, product_name, product_status) {
         console.log(error);
       }
     });
-    console.log(product_bought_checkbox);
-    console.log(product_not_bought_checkbox);
+    //console.log(product_bought_checkbox);
+    //console.log(product_not_bought_checkbox);
 }
 
 function add_product() {
 
     var full_url = "http://localhost:8000/api/add_product";
 
-    var product_name =
+    var product_name = document.getElementById("new_product").value;
+    var product_container_HTML = `<div class="container text-center" id="product_container|product.id|">
+      <div class="card mb-3" style="max-width: 700px;">
+        <div class="row g-0">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-8">
+                  <h5 class="" style="visibility: hidden;">|product.id|</h5>
+                  <h5 class="card-title">|product.name|</h5>
+                </div>
+                <div class="col-4">
+                    <div class="row d-flex flex-column">
+                    <div class="col-12">
 
-    $.ajax({
-      "url": full_url,
-      "method": "POST",
-      "headers": {
-        "Content-Type": "application/json"
-      },
-      "data": JSON.stringify({
-        "name": product_name,
-        "buyed": false
-      }),
-      "success": function(){
-      if(product_status){
-          document.getElementById(product_bought_checkbox).style.display = "block";
-          document.getElementById(product_not_bought_checkbox).style.display = "none";
-      }
-      else{
-          document.getElementById(product_bought_checkbox).style.display = "none";
-          document.getElementById(product_not_bought_checkbox).style.display = "block";
-      }
-      },
-      "error": (error) => {
-        console.log(error);
-      }
-    });
-    console.log(product_bought_checkbox);
-    console.log(product_not_bought_checkbox);
+                          <button id="product_bought_checkbox|product.id|"  style=" {% if product.buyed == True %} display: block; {% else %} display: none; {% endif %} min-width: 100px;" type="submit" class="btn btn-success mx-auto" onclick="mark_product(|product.id|, |product.name|, false)">&#10003;</button>
+
+                          <button id="product_not_bought_checkbox|product.id|" style=" {% if product.buyed == True %} display: none; {% else %} display: block; {% endif %} min-width: 100px;" type="submit" class="btn btn-warning mx-auto" onclick="mark_product(|product.id|, |product.name|, true)">Kupione</button>
+
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-danger mt-2" style="min-width: 100px;" onclick="delete_product(|product.id|)">Usuń</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    console.log(product_container_HTML);
+    //console.log(product_name);
+        if(product_name != "" && product_name != null){
+            $.ajax({
+          "url": full_url,
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "data": JSON.stringify({
+            "name": product_name,
+            "buyed": false
+          }),
+          "success": function (response) {
+              console.log(response.post.id);
+              product_container_HTML = product_container_HTML.replaceAll("|product.id|", response.post.id)
+              product_container_HTML = product_container_HTML.replaceAll("|product.name|", response.post.name)
+              console.log(product_container_HTML);
+          },
+          "error": (error) => {
+            console.log(error);
+          }
+        });
+    }
+
 }
 </script>
