@@ -12,4 +12,4 @@ class Product(models.Model):
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ['name', 'buyed']
+        fields = ['id', 'name', 'buyed']

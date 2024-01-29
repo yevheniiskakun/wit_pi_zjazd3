@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from .models import Product, ProductSerializer
 
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, generics
 
 def index(request):
     products = Product.objects.all()
@@ -21,10 +21,7 @@ def add_product(request):
     return redirect('/')
 
 def delete_product(request, id):
-    Product.objects.filter(id=id).delete()
-    products = Product.objects.all()
-    context = {"products": products}
-    return redirect('/')
+    pass
 
 
 def mark_product(request, id):
@@ -46,3 +43,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #permission_classes = [permissions.IsAuthenticated]
+
+class ProductDelete(generics.DestroyAPIView):
+    """
+    API endpoint that allows products to be deleted.
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
