@@ -15,6 +15,7 @@ class ProductSerializer(serializers.Serializer):
         model = Product
         fields = ['id', 'name', 'buyed']
 
+    id = serializers.IntegerField(required=False)
     name = serializers.CharField(max_length=255, read_only=False)
     buyed = serializers.BooleanField(read_only=False)
 
@@ -28,3 +29,7 @@ class ProductSerializer(serializers.Serializer):
         instance.save()
 
         return instance
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

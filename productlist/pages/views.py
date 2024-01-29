@@ -27,7 +27,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #permission_classes = [permissions.IsAuthenticated]
-
+'''
 class ProductDelete(generics.DestroyAPIView):
     """
     API endpoint that allows products to be deleted.
@@ -56,6 +56,7 @@ class MarkProduct(generics.UpdateAPIView):
         serializer.save()
 
         return Response({"post": serializer.data})
+'''
 
 class ProductAdd(generics.ListCreateAPIView):
     """
@@ -69,5 +70,5 @@ class ProductAdd(generics.ListCreateAPIView):
         return Response({'post': serializer.data})
 
 class ProductAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Products.objects.all()
-    serializer_class = WomenSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
