@@ -1,6 +1,7 @@
 # wit_pi_zjazd3
 
 Wytyczne do projektu:
+
 Należy przekształcić aplikacje z zadania 2  tak aby:
 - Logike biznesową (CRUD) miała wystawiona w formie REST API
 - UI i frontend jako osobna aplikacja typu Single Page Application (React, Angular, Vue, JQuery) 
