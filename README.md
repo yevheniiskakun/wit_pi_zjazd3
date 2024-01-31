@@ -53,6 +53,6 @@ No token or authorization is needed
 
 ![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/5f69e5b2-dbee-4701-969d-ba4c7da101f1)
 
-![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/be0c9da2-3914-4c5b-a732-19f72cdcc201)
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/11bdfe28-c3fb-4147-add5-00ada996043b)
 
 ![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/8d1491fc-2e23-43f0-a0e0-40b8e6ba7f97)
