@@ -41,3 +41,18 @@ python manage.py migrate
 python manage.py runserver
 
 python manage.py createsuperuser
+
+
+API request examples:
+No token or authorization is needed
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/d37cfd93-c015-4eb3-826c-5e70432eb86e)
+
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/3ac56f5b-7849-46e5-8854-a7df87361411)
+
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/20bd21d0-20ca-453e-8eaf-986aeb6b3439)
+
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/5f69e5b2-dbee-4701-969d-ba4c7da101f1)
+
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/be0c9da2-3914-4c5b-a732-19f72cdcc201)
+
+![image](https://github.com/yevheniiskakun/wit_pi_zjazd3/assets/56674669/8d1491fc-2e23-43f0-a0e0-40b8e6ba7f97)
